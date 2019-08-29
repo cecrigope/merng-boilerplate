@@ -5,8 +5,10 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
 
+let port = (process.env.PORT || 5000);
+
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000"
+  uri: "http://localhost:" + port
 });
 
 const client = new ApolloClient({
