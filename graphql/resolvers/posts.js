@@ -45,6 +45,10 @@ module.exports = {
 
       const post = await newPost.save();
 
+      context.pubSub.publish("NEW_POST", {
+        newPost: post
+      });
+
       return post;
     },
 
@@ -79,13 +83,21 @@ module.exports = {
           post.likes.push({
             username,
             createdAt: new Date().toISOString()
-          })
+          });
         }
 
         await post.save();
         return post;
       } else {
         throw new UserInputError("Post not found");
+      }
+    }
+  },
+
+  Subscription: {
+    newPost: {
+      async subscribe(_, __, { pubSub }) {
+        return pubSub.asyncIterator("NEW_POST");
       }
     }
   }
