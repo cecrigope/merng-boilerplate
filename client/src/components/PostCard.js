@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon, Label, Image, Button, Header } from "semantic-ui-react";
+import { Card, Label, Image, Button, Header, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -23,7 +23,7 @@ function PostCard({
           src="https://react.semantic-ui.com/images/avatar/large/molly.png"
         />
         <Card.Header>
-          <Header as="h3" color="teal">@{username}</Header>
+          <Header as="h3" color="teal">{username}</Header>
         </Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow()}
@@ -33,7 +33,7 @@ function PostCard({
       <Card.Content extra>
         <Button as="div" labelPosition="right" onClick={likePost}>
           <Button color="teal" basic>
-            <Icon name="thumbs up" />
+            <p>Likes</p>
           </Button>
           <Label basic color="teal" pointing="left">
             {likeCount}
@@ -41,7 +41,7 @@ function PostCard({
         </Button>
         <Button as="div" labelPosition="right" onClick={commentOnPost}>
           <Button color="orange" basic>
-            <Icon name="comments" />
+            <p>Comments</p>
           </Button>
           <Label basic color="orange" pointing="left">
             {commentCount}
