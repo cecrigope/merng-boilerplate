@@ -33,17 +33,17 @@ function PostCard({
       <Card.Content extra>
         <Button as="div" labelPosition="right" onClick={likePost}>
           <Button color="teal" basic>
-            <Icon name="heart" />
+            <Icon name="thumbs up" />
           </Button>
           <Label basic color="teal" pointing="left">
             {likeCount}
           </Label>
         </Button>
         <Button as="div" labelPosition="right" onClick={commentOnPost}>
-          <Button color="blue" basic>
+          <Button color="orange" basic>
             <Icon name="comments" />
           </Button>
-          <Label basic color="blue" pointing="left">
+          <Label basic color="orange" pointing="left">
             {commentCount}
           </Label>
         </Button>

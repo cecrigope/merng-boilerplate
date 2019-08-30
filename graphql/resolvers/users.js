@@ -30,21 +30,21 @@ module.exports = {
       const { errors, valid } = validateLoginInput(username, password);
 
       if (!valid) {
-        throw new UserInputError('Errors', { errors });
+        throw new UserInputError("Errors", { errors });
       }
 
       const user = await User.findOne({ username });
 
       if (!user) {
         errors.general = "User not found";
-        throw new UserInputError('User not found', { errors });
+        throw new UserInputError("User not found", { errors });
       }
 
       const match = await bcrypt.compare(password, user.password);
 
       if (!match) {
         errors.general = "Wrong credentials";
-        throw new UserInputError('Wrong credentials', { errors });
+        throw new UserInputError("Wrong credentials", { errors });
       }
 
       const token = generateToken(user);
@@ -55,6 +55,7 @@ module.exports = {
         token
       };
     },
+
     async register(
       _,
       {
@@ -72,12 +73,22 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      const user = await User.findOne({ username });
+      isUsernameDuplicate = await User.findOne({ username });
 
-      if (user) {
-        throw new UserInputError("Username already taken", {
+      if (isUsernameDuplicate) {
+        throw new UserInputError("An account with that username already exists", {
           errors: {
-            username: "This username is already taken"
+            username: "An account with that username already exists"
+          }
+        });
+      }
+
+      isEmailDuplicate = await User.findOne({ email });
+
+      if (isEmailDuplicate) {
+        throw new UserInputError("An account with that e-mail already exists", {
+          errors: {
+            email: "An account with that email already exists"
           }
         });
       }
