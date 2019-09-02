@@ -23,7 +23,9 @@ function PostCard({
           src="https://react.semantic-ui.com/images/avatar/large/molly.png"
         />
         <Card.Header>
-          <Header as="h3" color="teal">{username}</Header>
+          <Header as="h3" color="teal">
+            {username}
+          </Header>
         </Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow()}
@@ -33,7 +35,7 @@ function PostCard({
       <Card.Content extra>
         <Button as="div" labelPosition="right" onClick={likePost}>
           <Button color="teal" basic>
-            <p>Likes</p>
+            <Icon name='heart' />
           </Button>
           <Label basic color="teal" pointing="left">
             {likeCount}
@@ -41,7 +43,7 @@ function PostCard({
         </Button>
         <Button as="div" labelPosition="right" onClick={commentOnPost}>
           <Button color="orange" basic>
-            <p>Comments</p>
+            <Icon name="comments" />
           </Button>
           <Label basic color="orange" pointing="left">
             {commentCount}
